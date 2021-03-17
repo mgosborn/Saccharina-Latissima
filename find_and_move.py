@@ -41,6 +41,10 @@ os.system(cmd)
 
 batches = ['batch1','batch2','batch3']
 for batch in batches:
-    cmd = 'for file in $(cat ' + subsetFolder + batch +'.txt); do mv "$file" /' + batch + '; done'
-    print(cmd)
-    os.system(cmd)
+    x = batch + '.txt'
+    with open(x, 'r') as files:
+        for file in files:
+            file_stripped = file.strip() #get rid of any trailing/leading white space
+            cmd = 'mv *' + file_stripped + '* ' + batch
+            print(cmd)
+            os.system(cmd)
